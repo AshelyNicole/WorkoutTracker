@@ -3,7 +3,8 @@ let db = require("../models");
 
 mongoose.connect("mongodb://localhost/workout", {
   useNewUrlParser: true,
-  useFindAndModify: false
+  useFindAndModify: false,
+  useUnifiedTopology: true
 });
 
 let workoutSeed = [
@@ -145,3 +146,5 @@ db.Workout.deleteMany({})
     console.error(err);
     process.exit(1);
   });
+
+  
