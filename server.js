@@ -12,20 +12,16 @@ var PORT = process.env.PORT || 8000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-require('dotenv').config()
-const uri = process.env.MONGODB_URI;
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true});
-const connection = mongoose.connection;
-connection.once("open", () => {
-    console.log('MongoDB database connection established succesfully!')
-});
-
 app.use(express.static("public"));
+
+mongoose.connect(process.env.ATLAS_URI || "mongodb://localhost/dbFitnessTracker", { useNewUrlParser: true })
+
+
 app.use(require("./routes/index"))
 app.use(require("./routes/path"))
 
 
 app.listen(PORT, () => {
-    console.log("Server listening on: http://localhost:" + PORT);
+    console.log(`App running on port ${PORT}` );
   });
   
